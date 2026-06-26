@@ -1,0 +1,14 @@
+[project]
+name = "GroupCalendar"
+version = "1.0.0"
+description = "A calendar app for aligning schedules"
+dependencies = [
+    "flask",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[project.scripts]
+groupcalendar = "groupcalendar:create_app"

@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+
+.title {
+    font-family: "Coiny", system-ui !important;
+}
+
+.form-control {
+    border-color: rgb(124, 124, 124);
+}
+
+.calendar-day {
+    min-height: 12vh;
+    padding: 0;
+}
+
+.self-available, .self-occupied, .self-uncertain {
+    border-radius: 5px 5px 0 0;
+}
+
+.self-available, .others-available {
+    background-color: #BEEDC0 !important;
+}
+
+.self-occupied, .others-occupied {
+    background-color: #EDC6BE !important;
+}
+
+.self-uncertain{
+    background-color: #D5BEED !important;
+}
+
+.others-status{
+    background-color: #D5BEED !important;
+}
+
+.others-status {
+    border: 2px solid rgb(181, 181, 181);
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+}
+
+.others-status:hover {
+    border-color: rgb(181, 181, 181);
+}
+
+.status-list, #member-list {
+    white-space: pre-line;
+}
+
+.fc-green {
+    color: #BEEDC0;
+}
+
+.fc-red {
+    color: #EDC6BE;
+}
+
+.fc-purple {
+    color: #D5BEED;
+}
+
+#logout-mobile {
+    display: flex;
+}
+
+#logout-landscape {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .nav-link {
+        max-width: 10vw;
+    }
+
+    #logout-mobile {
+        display: none;
+    }
+
+    #logout-landscape {
+        display: flex;
+    }
+}
+

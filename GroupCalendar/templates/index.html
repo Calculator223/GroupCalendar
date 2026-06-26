@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="/static/js/api.js" type="module"></script>
+    <script src="/static/js/main.js" type="module"></script>
+
+    <title>:D</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand ps-2">Home</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Group names -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <!-- Logout button -->
+                <li class="nav-item my-2" id="logout-mobile">
+                    <div class="d-flex">
+                        <p class="text-white my-auto me-2 username-display">This</p>
+                        <a class="btn btn-outline-light">Log Out<i class="bi bi-box-arrow-right ps-2"></i></a>
+                    </div>
+                </li>
+            </ul>
+            </div>
+            <!-- Logout button -->
+            <div class="nav-item" id="logout-landscape">
+                <div class="d-flex">
+                    <p class="text-white my-auto mx-2 username-display">This</p>
+                    <a class="btn btn-outline-light">Log Out<i class="bi bi-box-arrow-right ps-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Template for calendar itself -->
+    <template id="calendar-template">
+        <!-- Calendar -->
+        <div class="container-md mt-4 user-select-none calendar">
+            <!-- Top bar -->
+            <div class="row my-3 mx-0 justify-content-between">
+                <!-- Share button and dropdown -->
+                <div class="col dropdown g-0 my-auto">
+                    <button class="btn dropdown-toggle m-auto px-1"
+                data-bs-toggle="dropdown" aria-expanded="false">Set all</button>
+                <ul class="dropdown-menu bg-light set-all-dropdown">
+                    <li class="dropdown-item-text">Status</li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-green"></i>Available
+                    </button></li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-red"></i>Occupied
+                    </button></li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-purple"></i>Uncertain
+                    </button></li>
+                </ul>
+                </div>
+                <!-- Month text display and arrow buttons-->
+                <div class="col d-flex justify-content-center g-0">
+                    <button class="btn fs-5 lh-1 px-2"><i class="bi bi-caret-left-fill"></i></button>
+                    <button class="btn fs-5 lh-1 px-2"><i class="bi bi-caret-left"></i></button>
+                    <h2 class="my-auto mx-0">June 2026</h2>
+                    <button class="btn fs-5 lh-1 px-2"><i class="bi bi-caret-right"></i></button>
+                    <button class="btn fs-5 lh-1 px-2"><i class="bi bi-caret-right-fill"></i></button>
+                </div>
+                <!-- Options button and member list dropdown -->
+                <div class="col dropdown d-flex flex-row-reverse g-0">
+                    <button class="btn px-1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fs-5 bi bi-info-circle-fill"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end p-3">
+                        <label class="form-label mb-0 text-decoration-underline">Group members</label>
+                        <p id="member-list" class=""></p>
+                        <hr class="dropdown-divider">
+                        <label class="form-label">Invite code</label>
+                        <div class="d-flex w-100">
+                            <p class="border rounded-2 my-auto p-2" id="invite-code">hDDDD</p>
+                            <a class="btn" id="copy-invite"><i class="m-auto p-0 bi bi-copy"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid" id="days-display">
+                <!-- Weekdays display-->
+                <div class="row flex-nowrap bg-light align-items-center text-center" style="min-height: 6vh;"> 
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Sun</p> </div>
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Mon</p>
+                    </div>
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Tue</p>
+                    </div>
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Wed</p>
+                    </div>
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Thu</p>
+                    </div>
+                    <div class="col border-end border-2 p-0">
+                        <p class="m-0">Fri</p>
+                    </div>
+                    <div class="col p-0">
+                        <p class="m-0">Sat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template for calendar cell-->
+    <template id="calendar-cell">
+        <div class="col border border-3 border-white calendar-day">
+            <div class="dropdown d-flex" style="height: 50%;">
+                <button class="btn dropdown-toggle w-100 h-100 date-num self-avail p-0"
+                data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu bg-light status-select">
+                    <li class="dropdown-item-text">Status</li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-green"></i>Available
+                    </button></li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-red"></i>Occupied
+                    </button></li>
+                    <li><button class="dropdown-item">
+                        <i class="bi bi-square-fill pe-1 fc-purple"></i>Uncertain
+                    </button></li>
+                </ul>
+            </div>
+            
+            <div class="dropdown w-100" style="height: 50%;">
+                <button class="btn d-flex h-100 w-100 p-0 others-status" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="h-100 others-available" style="width: 40%;"></div>
+                        <div class="h-100 others-occupied" style="width: 40%;"></div>
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex" style="z-index: 2;">
+                            <i class="text-muted bi bi-info-circle m-auto"></i>
+                        </div>
+                </button>
+                <ul class="dropdown-menu py-1">
+                    <li class="dropdown-header py-1">Available</li>
+                    <li class="dropdown-item-text py-0 status-list"></li>
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li class="dropdown-header py-1">Occupied</li>
+                    <li class="dropdown-item-text py-0 status-list"></li>
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li class="dropdown-header py-1">Uncertain</li>
+                    <li class="dropdown-item-text py-0 status-list"></li>
+                </ul>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template for homepage -->
+    <template id="home-template">
+        <div class="home d-grid col-8 col-md-6 mx-auto mt-5 gap-3">
+            <h2 class="mx-auto">Select Group</h2>
+            <p></p>
+
+            <div class="collapse" id="joinCollapse">
+                <form id="join-form" class="card card-body">
+                    <label for="invitecode" class="form-label">Group Invite code</label>
+                    <input class="form-control" type="text" id="invitecode" name="invitecode">
+                    <button type="sumbit" class="btn btn-primary mt-3">Join</button>
+                </form>
+            </div>
+            <button class="btn btn-secondary border border-dark btn-lg shadow"
+            data-bs-toggle="collapse" href="#joinCollapse" aria-expanded="false" aria-controls="joinCollapse">
+                Join Group
+            </button>
+            
+            <div class="collapse" id="createCollapse">
+                <form id="create-form" class="card card-body">
+                    <label for="groupname" class="form-label">Group Name</label>
+                    <input class="form-control" type="text" id="groupname" name="groupname">
+                    <div class="form-text">Group name must be shorter than 20 characters</div>
+                    <button type="sumbit" class="btn btn-primary mt-3">Create</button>
+                </form>
+            </div>
+            <button class="btn btn-secondary border border-dark btn-lg shadow"
+            data-bs-toggle="collapse" href="#createCollapse" aria-expanded="false" aria-controls="createCollapse">
+                Create Group
+            </button>
+        </div>
+    </template>
+</body>
+</html>
