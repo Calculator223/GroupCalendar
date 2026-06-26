@@ -17,7 +17,6 @@ let months = {
     4: "May", 5:"June", 6: "July", 7: "August",
     8: "September", 9: "October", 10: "November", 11: "December"
 };
-let rows=[];
 
 
 function to_date_string(date) {
@@ -313,7 +312,6 @@ async function render_month() {
 
     // creating rows to store the cells
     // Then create cells to fill in the rows
-    rows = [];
     for (let i=0; i<days/7; i++) {
         let row = document.createElement("div");
         row.classList.add('row', 'flex-nowrap','text-center','calendar-row');
@@ -330,17 +328,15 @@ async function render_month() {
             render_cell(row, date, day_data, data["MemberCount"]);
             date.setTime(date.getTime() + 86400*1000)
         }
-        rows.push(row);
     }
 }
 
 
 // Deletes all cells from calendar
 function remove_cells() {
-    rows.forEach(element => {
-    element.remove();
+    document.querySelectorAll(".calendar-row").forEach(element => {
+        element.remove();
     });
-    rows = [];
 }
 
 // Remove calendar or home page
