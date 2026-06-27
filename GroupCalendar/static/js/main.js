@@ -198,7 +198,7 @@ async function render_calendar() {
     let arrows = calendar_clone.querySelectorAll("button.fs-5.lh-1");
     for (let i = 0; i < 4; i++) {
         arrows[i].addEventListener("click", () => {
-            increment_month(increment_delta[i]);
+            await increment_month(increment_delta[i]);
         })
     }
 
@@ -333,7 +333,7 @@ async function render_month() {
 
 
 // Deletes all cells from calendar
-function remove_cells() {
+async function remove_cells() {
     document.querySelectorAll(".calendar-row").forEach(element => {
         element.remove();
     });
@@ -355,11 +355,11 @@ function clear_page() {
 
 
 // Set new display month and year, then refreshes calendar
-function increment_month(delta) {
+async function increment_month(delta) {
     let t = display_month+display_year*12+delta;
     display_month = t%12;
     display_year = Math.floor(t/12);
-    remove_cells();
+    await remove_cells();
     render_month();
 }
 
