@@ -197,7 +197,7 @@ async function render_calendar() {
     let increment_delta = [-12, -1, 1, 12]
     let arrows = calendar_clone.querySelectorAll("button.fs-5.lh-1");
     for (let i = 0; i < 4; i++) {
-        arrows[i].addEventListener("click", () => {
+        arrows[i].addEventListener("click", async function() {
             await increment_month(increment_delta[i]);
         })
     }
